@@ -13,11 +13,21 @@ class UpdatableOutput<AggregatorT, AppendableT>(
     private val aggregator: AggregatorT,
     private val append: (AggregatorT, AppendableT) -> Unit,
     private val renderer: (AggregatorT) -> DisplayResult,
+    isLazy: Boolean = true,
     private val id: String = UUID.randomUUID().toString()
 ) {
     private var isAdded = false
+
+    init {
+        if (!isLazy) doRender()
+    }
+
     fun append(appendable: AppendableT) {
         append(aggregator, appendable)
+        doRender()
+    }
+
+    private fun doRender() {
         val wasAdded = isAdded
         isAdded = true
         val newOutput = renderer(aggregator)
