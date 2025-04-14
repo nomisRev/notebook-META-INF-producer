@@ -11,6 +11,9 @@ repositories {
 }
 
 dependencies {
+    implementation("dev.langchain4j:langchain4j:1.0.0-beta3")
+    implementation("dev.langchain4j:langchain4j-ollama:1.0.0-beta3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     testImplementation(kotlin("test"))
 }
 
